@@ -1,0 +1,116 @@
+"use client";
+import {
+  Email,
+  LockOutlineRounded,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import {
+  Alert,
+  Button,
+  IconButton,
+  InputAdornment,
+  Link,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+
+const Login = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  const [showPass, setShowPass] = useState(false);
+  const handlePassToggle = () => {
+    setShowPass(!showPass);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+  const router = useRouter();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toast.dismiss();
+    if (!formData.email || !formData.password) {
+      toast.error("Please fill all the fields");
+      return;
+    }
+    router.push("/");
+    toast.success("Logged in Successfully!");
+  };
+  return (
+    <div className="px-2 md:px-5  ">
+      <Paper elevation={10} className="flex flex-col gap-5 w-full p-5 md:p-10">
+        <h1 className="text-center font-semibold text-lg text-blue-500">
+          Sign In
+        </h1>
+        <p className="text-center font-medium text-blue-500">Welcome Back !</p>
+        <TextField
+          label="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          placeholder="Your email"
+          onChange={handleChange}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Email />
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+
+        <TextField
+          label="Password"
+          name="password"
+          type={showPass ? "text" : "password"}
+          value={formData.password}
+          placeholder="Password"
+          onChange={handleChange}
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <LockOutlineRounded />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={handlePassToggle}
+                    title={showPass ? "hide password" : "show password"}
+                  >
+                    {showPass ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+        <Button onClick={handleSubmit} variant="contained">
+          {" "}
+          Login
+        </Button>
+        <div className="flex justify-between items-center flex-col">
+          <Button>Forgot password?</Button>
+          <Typography>
+            Don't have an account? <Link href="/signup">Create one.</Link>
+          </Typography>
+        </div>
+      </Paper>
+    </div>
+  );
+};
+
+export default Login;

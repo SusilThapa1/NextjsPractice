@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const SignUpForm = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -49,12 +49,14 @@ const SignUpForm = () => {
     toast.success("Registered Successfully!");
   };
   return (
-    <Container className="px-2 md:px-5 ">
-      <Paper elevation={10} className="flex flex-col gap-5 w-full p-5 md:p-10">
-        <h1 className="text-center font-semibold text-lg text-blue-500">
+    <Container className="px-2 md:px-5 w-full">
+      <Paper className="flex flex-col gap-5 w-full p-5 md:p-10">
+        <h1 className="text-center font-semibold text-lg text-purple-600">
           Sign Up
         </h1>
+
         <TextField
+          color="secondary"
           label="Name"
           name="username"
           value={formData.username}
@@ -71,6 +73,7 @@ const SignUpForm = () => {
           }}
         />
         <TextField
+          color="secondary"
           label="Email"
           type="email"
           name="email"
@@ -89,6 +92,7 @@ const SignUpForm = () => {
         />
 
         <TextField
+          color="secondary"
           label="Password"
           name="password"
           type={showPass ? "text" : "password"}
@@ -115,14 +119,20 @@ const SignUpForm = () => {
             },
           }}
         />
-        <Button onClick={handleSubmit} type="submit" variant="contained">
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          className="!bg-purple-600"
+        >
           {" "}
           Login
         </Button>
         <div className="flex justify-between items-center flex-col">
-          <Button>Forgot password?</Button>
           <Typography>
-            Already have an account? <Link href="/login">Sign in</Link>
+            Already have an account?{" "}
+            <Link color="secondary" href="/login">
+              Sign in here.
+            </Link>
           </Typography>
         </div>
       </Paper>
@@ -130,4 +140,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default Register;

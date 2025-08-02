@@ -47,13 +47,16 @@ const Login = () => {
     toast.success("Logged in Successfully!");
   };
   return (
-    <div className="px-2 md:px-5  ">
-      <Paper elevation={10} className="flex flex-col gap-5 w-full p-5 md:p-10">
-        <h1 className="text-center font-semibold text-lg text-blue-500">
+    <div className="px-2 md:px-5 ">
+      <Paper className="flex flex-col gap-5 !w-full p-5 md:p-10">
+        <h1 className="text-center font-semibold text-lg text-purple-600">
           Sign In
         </h1>
-        <p className="text-center font-medium text-blue-500">Welcome Back !</p>
+        <p className="text-center font-medium text-purple-600">
+          Welcome Back !
+        </p>
         <TextField
+          color="secondary"
           label="Email"
           type="email"
           name="email"
@@ -72,6 +75,7 @@ const Login = () => {
         />
 
         <TextField
+          color="secondary"
           label="Password"
           name="password"
           type={showPass ? "text" : "password"}
@@ -98,14 +102,21 @@ const Login = () => {
             },
           }}
         />
-        <Button onClick={handleSubmit} variant="contained">
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          className="!bg-purple-600"
+        >
           {" "}
           Login
         </Button>
         <div className="flex justify-between items-center flex-col">
-          <Button>Forgot password?</Button>
+          <Link color="secondary">Forgot password?</Link>
           <Typography>
-            Don't have an account? <Link href="/signup">Create one.</Link>
+            Don't have an account?{" "}
+            <Link color="secondary" href="/signup">
+              Create one.
+            </Link>
           </Typography>
         </div>
       </Paper>

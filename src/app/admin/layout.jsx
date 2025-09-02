@@ -7,7 +7,7 @@ export default function RootLayout({ children }) {
   return (
     <div className="flex w-full h-[calc(100vh-64px)]">
       {/* Sidebar (Fixed width) */}
-      <div className="w-40 bg-white  h-full shadow-lg">
+      <div className="w-50 bg-white  h-full shadow-lg">
         <Sidebar />
       </div>
 

@@ -5,7 +5,7 @@ import { Paper, Avatar, Typography, Button } from "@mui/material";
 export default function UserProfile() {
   return (
     // <div className="min-h-screen bg-gray-100 flex justify-center items-start p-6">
-      <Paper className="w-full max-w-2xl p-6 sm:p-8 rounded-lg shadow-md">
+      <Paper className="w-full max-w-4xl p-6 sm:p-8 rounded-lg shadow-md">
         {/* User Header */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
           <Avatar sx={{ width: 80, height: 80 }}>ST</Avatar>

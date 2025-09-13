@@ -1,6 +1,5 @@
 "use client";
 import {
-  Alert,
   AppBar,
   Avatar,
   Box,
@@ -8,7 +7,6 @@ import {
   IconButton,
   Stack,
   Toolbar,
-  Typography,
 } from "@mui/material";
 import DirectionsCarFilledIcon from "@mui/icons-material/DirectionsCarFilled";
 import Link from "next/link";
@@ -21,14 +19,15 @@ const Navbar = () => {
   const [user, setUser] = useState(true);
   const router = useRouter();
   const [showMenu, setShowMenu] = useState(false);
-  const handleShowMenu = () => {
-    setShowMenu(!showMenu);
-  };
-  const handlelogout = () => {
+
+  const handleShowMenu = () => setShowMenu(!showMenu);
+
+  const handleLogout = () => {
     setUser(false);
     router.push("/login");
     toast.success("Logged out successfully");
   };
+
   const navLinks = [
     { name: "Home", link: "/" },
     { name: "About", link: "/about" },
@@ -36,95 +35,91 @@ const Navbar = () => {
     { name: "Projects", link: "/projects" },
     { name: "Contact", link: "/contact" },
   ];
+
   return (
-    <AppBar sx={{ height: "64px", top: 0 }} position="fixed">
-      <Toolbar className="flex justify-between items-center gap-5">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+    <AppBar position="fixed" className="!bg-blue-600 !h-16 !top-0">
+      <Toolbar className="flex justify-between items-center px-4 md:px-8">
+        {/* Logo + Menu Button */}
+        <Box className="flex items-center gap-2 cursor-pointer">
           <IconButton
             onClick={handleShowMenu}
-            sx={{ display: { sm: "none" }, fontSize: 12 }}
+            className=" hidden"
+            size="small"
           >
             {showMenu ? (
-              <Close color="error" />
+              <Close className="text-red-500" />
             ) : (
-              <MenuOutlined sx={{ color: "white" }} />
+              <MenuOutlined className="text-white" />
             )}
           </IconButton>
-          <DirectionsCarFilledIcon />
-          <h1 className="text-[16px]  md:text-lg">Logo</h1>
+
+          <Box
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => router.push("/")}
+          >
+            <DirectionsCarFilledIcon className="text-white" />
+            <h1 className="text-sm md:text-lg font-semibold text-white">
+              Logo
+            </h1>
+          </Box>
         </Box>
-        {/* Desktop menu */}
-        <Stack direction="row" sx={{ display: { xs: "none", sm: "flex" } }}>
+
+        {/* Desktop Menu */}
+        <Stack direction="row" className="hidden sm:flex space-x-4">
           {navLinks.map((navLink, i) => (
             <Button
+              key={i}
               component={Link}
               href={navLink.link}
-              key={i}
-              variant="text"
-              color="#3b5165"
-              sx={{
-                "&:hover": { color: "#22374b" },
-                transition: "0.3s ease",
-                fontWeight: 600,
-                fontSize: { sm: 13 },
-              }}
+              className="!text-white !font-semibold hover:!text-gray-200 transition duration-300 text-sm"
             >
               {navLink.name}
             </Button>
           ))}
         </Stack>
+
+        {/* User / Auth Buttons */}
         {user ? (
-          <Stack direction="row">
+          <Stack direction="row" className="items-center gap-2">
             <Avatar src="https://mui.com/static/images/avatar/1.jpg" />
-            <IconButton onClick={handlelogout}>
+            <IconButton onClick={handleLogout}>
               <Logout className="text-white" />
             </IconButton>
           </Stack>
         ) : (
-          <Box component="div" className="flex gap-3">
+          <div className="flex gap-3">
             <Button
               href="/login"
               variant="outlined"
-              color="#ffff"
-              sx={{ fontSize: { xs: 10, sm: 12, md: 14 } }}
+              className="!text-white border border-white text-xs sm:text-sm"
             >
               Login
             </Button>
             <Button
               href="/signup"
               variant="outlined"
-              color="#ffff"
-              sx={{ fontSize: { xs: 10, sm: 12, md: 14 } }}
+              className="!text-white border border-white text-xs sm:text-sm"
             >
               Register
             </Button>
-          </Box>
+          </div>
         )}
       </Toolbar>
+
+      {/* Mobile Menu */}
       <Box
         component="div"
-        className={`absolute top-16 left-0 w-1/2 h-screen bg-[#1975d1] px-4 flex  flex-col gap-4 transition-all duration-300 z-20 ${
+        className={`absolute top-16 left-0 w-1/2 h-screen bg-blue-700 px-4 flex flex-col gap-4 transition-transform duration-300 z-20 ${
           showMenu ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {navLinks.map((navLink, i) => (
           <Button
+            key={i}
             component={Link}
             href={navLink.link}
-            key={i}
             onClick={() => setShowMenu(false)}
-            sx={{
-              color: "#fff",
-              justifyContent: "flex-start",
-              fontWeight: 600,
-              "&:hover": { color: "#cfd8dc", bgcolor: "primary" },
-            }}
+            className="!text-white justify-start font-semibold hover:!text-gray-200"
           >
             {navLink.name}
           </Button>

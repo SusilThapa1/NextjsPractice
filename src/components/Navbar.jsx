@@ -43,7 +43,7 @@ const Navbar = () => {
         <Box className="flex items-center gap-2 cursor-pointer">
           <IconButton
             onClick={handleShowMenu}
-            className=" hidden"
+            className="md:!hidden block"
             size="small"
           >
             {showMenu ? (
@@ -65,7 +65,7 @@ const Navbar = () => {
         </Box>
 
         {/* Desktop Menu */}
-        <Stack direction="row" className="hidden sm:flex space-x-4">
+        <div className="!hidden md:!flex space-x-4">
           {navLinks.map((navLink, i) => (
             <Button
               key={i}
@@ -76,7 +76,7 @@ const Navbar = () => {
               {navLink.name}
             </Button>
           ))}
-        </Stack>
+        </div>
 
         {/* User / Auth Buttons */}
         {user ? (
